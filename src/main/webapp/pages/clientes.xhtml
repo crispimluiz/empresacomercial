@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Clientes</title>
+</h:head>
+<h:body>
+	<p:growl id="mensagem" />
+	<h:form id="formListagem">
+		<p:panel header="Clientes - Listagem">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{clienteBean.clientes}" var="cliente"
+				rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" actionListener="#{clienteBean.novo}"
+						oncomplete="PF('dialogo').show();"
+						update=":mensagem :formCadastro:painel">
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+				</f:facet>
+
+				<p:column headerText="Nome" filterBy="#{cliente.nomeCliente}"
+					sortBy="#{cliente.nomeCliente}">
+					<h:outputText value="#{cliente.nomeCliente}" />
+				</p:column>
+
+				<p:column headerText="Endereço" filterBy="#{cliente.endereco}"
+					sortBy="#{cliente.endereco}">
+					<h:outputText value="#{cliente.endereco}" />
+				</p:column>
+
+				<p:column headerText="Cidade" filterBy="#{cliente.cidade}"
+					sortBy="#{cliente.cidade}">
+					<h:outputText value="#{cliente.cidade}" />
+				</p:column>
+
+				<p:column headerText="Estado" filterBy="#{cliente.estado}"
+					sortBy="#{cliente.estado}">
+					<h:outputText value="#{cliente.estado}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{clienteBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+						<p:confirm header="Confirmação"
+							message="Deseja excluir esse Clinte?" icon="ui-icon-alert" />
+						<f:attribute name="pessoaSelecionada" value="#{cliente}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{clienteBean.editar}"
+						update=":mensagem :formCadastro:painel"
+						oncomplete="PF('dialogo').show();">
+						<f:attribute name="pessoaSelecionada" value="#{cliente}" />
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Clientes - Cadastro" widgetVar="dialogo"
+		draggable="false" resizable="false" modal="true" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+
+				<p:outputLabel for="cliente" value="Cliente:" />
+				<p:inputText id="cliente" maxlength="50" size="30"
+					value="#{clienteBean.cliente.nomeCliente}" required="true"
+					requiredMessage="O campo 'Nome' é obrigatório" />
+
+				<p:outputLabel for="endereco" value="Endereço:" />
+				<p:inputText id="endereco" maxlength="100" size="50"
+					value="#{clienteBean.cliente.endereco}" required="true"
+					requiredMessage="O campo 'Endereço' é obrigatório" />
+
+				<p:outputLabel for="numeroEndereco" value="Número:" />
+				<p:inputText id="numeroEndereco" maxlength="30" size="10"
+					value="#{clienteBean.cliente.numeroEndereco}" />
+
+				<p:outputLabel for="telefone" value="Telefone:" />
+				<p:inputMask id="telefone" mask="(99)9999-9999"
+					value="#{clienteBean.cliente.telefone}" required="true"
+					requiredMessage="O campo 'Telefone' é obrigatório" />
+
+				<p:outputLabel for="tipoCliente" value="Física ou Juridica: " />
+				<p:selectOneMenu id="tipoCliente" filter="true" required="true"
+					requiredMessage="Preencha'PF: ou PJ':"
+					converter="omnifaces.SelectItemsConverter"
+					value="#{clienteBean.tipoCliente}">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Fìsica ou Juridica" />
+					<f:selectItems var="tipoClinte" value="#{clienteBean.tipoCliente}"
+						itemValue="#{tipoCliente}" itemLabel="#{clienteBean.tipoCliente}" />
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

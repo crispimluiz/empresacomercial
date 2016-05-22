@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Configurações de Conexão com a Database -->
+		<property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<property name="connection.url">jdbc:hsqldb:file:bancoDados//empresaComercial</property>
+		<property name="connection.username">SA</property>
+		<property name="connection.password">123456</property>
+
+		<!-- JDBC connection pool (Usando built-in) -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+
+		<!-- Habilita o Gerenciamento de contexto automático da sessão do Hibernate -->
+		<property name="current_session_context_class">thread</property>
+   
+          <!--  Desabilita a Cache secundária -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+   
+          <!-- Imprime todos os SQLs executados -->
+		<property name="show_sql">true</property>
+   
+          <!-- Excluir e re-cria o esquema da base de dados na inicialização -->
+		<property name="hbm2ddl.auto">create</property>
+		
+		
+		<mapping class="br.com.empresacomercial.domain.Cliente" />
+		<mapping class="br.com.empresacomercial.domain.Contato" />
+		<mapping class="br.com.empresacomercial.domain.Cargo" />
+		<mapping class="br.com.empresacomercial.domain.Departamento" />
+		<mapping class="br.com.empresacomercial.domain.Porte" />
+		<mapping class="br.com.empresacomercial.domain.TipoCliente" />
+		
+
+
+	</session-factory>
+
+</hibernate-configuration>
