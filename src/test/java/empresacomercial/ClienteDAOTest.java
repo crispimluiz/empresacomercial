@@ -8,15 +8,14 @@ import org.junit.Test;
 
 import br.com.empresacomercial.dao.ClienteDAO;
 import br.com.empresacomercial.domain.Cliente;
-import br.com.empresacomercial.domain.TipoCliente;
 
 public class ClienteDAOTest {
 
 	@Test
+	@Ignore
 	public void salvar() {
 		Cliente cliente = new Cliente();
-
-		cliente.setNomeCliente("Jeovana");
+		cliente.setNomeCliente("Marcos Eduardo");
 		cliente.setCidade("Araguari");
 		cliente.setEmail("antonio@live.com");
 		cliente.setTelefone("83209000074");
@@ -24,11 +23,11 @@ public class ClienteDAOTest {
 		cliente.setDataCadastro(new Date());
 		cliente.setLimiteCredito(1600.00);
 		cliente.setEstado("MG");
-		cliente.setTipoCliente(TipoCliente.CPF);
-
 		ClienteDAO clienteDAO = new ClienteDAO();
 		clienteDAO.salvar(cliente);
-
+		
+		
+		
 	}
 
 	@Test
@@ -54,7 +53,7 @@ public class ClienteDAOTest {
 		List<Cliente> resultado = clienteDAO.Listar();
 
 		for (Cliente cliente : resultado) {
-			System.out.println(cliente.getCodigo()+ " - " + cliente.getNome() + " - " + cliente.getEndereco()+ cliente.getTipoCliente() 
+			System.out.println(cliente.getCodigo()+ " - " + cliente.getNome() + " - " + cliente.getEndereco()
 			+ " - " +cliente.getLimiteCredito());
 		}
 	}

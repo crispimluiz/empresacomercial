@@ -28,14 +28,24 @@
 		</plugins>
 	</build>
 
+	<!-- PrimeFaces -->
+	<repositories>
+	<repository> 
+		<id>prime-repo</id>
+		<name>PrimeFaces Maven Repository</name>
+		<url>http://repository.primefaces.org</url>
+		<layout>default</layout>
+	</repository>
+
+	</repositories>
 
 	<!-- Dependências -->
 	<dependencies>
-		<!-- Hibernate Core -->
+		<!-- Hibernate Core Trabalahar com banco de dados e dados -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.11.Final</version>
+			<version>5.1.0.Final</version>
 		</dependency>
 
 		<dependency>
@@ -65,11 +75,39 @@
 			<version>5.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+
 		<!-- OmniFaces -->
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
 			<version>1.11</version>
 		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		
+		<!-- Jersey -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.22.1</version>
+		</dependency>
+
+		<!-- GSon -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.4</version>
+		</dependency>
+
 	</dependencies>
 </project>

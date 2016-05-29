@@ -13,7 +13,7 @@ public class HibernateUtil {
 		return fabricaDeSessoes;
 	}
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "deprecation" })
 	private static SessionFactory criarFabricaDeSessoes() {
 		try {
 			Configuration configuracao = new Configuration().configure();
@@ -24,7 +24,7 @@ public class HibernateUtil {
 			
 			return fabrica;
 		} catch (Throwable ex) {
-			System.err.println("A fábrica de sessões não pode ser criada. " + ex);
+			System.err.println("A fábrica de sessões não pode ser criada." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
 	}

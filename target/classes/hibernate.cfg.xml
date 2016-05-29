@@ -9,6 +9,7 @@
 
 		<!-- Configurações de Conexão com a Database -->
 		<property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<property name="hibernate.show_sql">true</property> 
 		<property name="connection.url">jdbc:hsqldb:file:bancoDados//empresaComercial</property>
 		<property name="connection.username">SA</property>
 		<property name="connection.password">123456</property>
@@ -29,7 +30,7 @@
 		<property name="show_sql">true</property>
    
           <!-- Excluir e re-cria o esquema da base de dados na inicialização -->
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property>
 		
 		
 		<mapping class="br.com.empresacomercial.domain.Cliente" />
@@ -39,8 +40,6 @@
 		<mapping class="br.com.empresacomercial.domain.Porte" />
 		<mapping class="br.com.empresacomercial.domain.TipoCliente" />
 		
-
-
 	</session-factory>
 
 </hibernate-configuration>

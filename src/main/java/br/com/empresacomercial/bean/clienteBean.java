@@ -6,19 +6,18 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
 import br.com.empresacomercial.dao.ClienteDAO;
 import br.com.empresacomercial.domain.Cliente;
-import br.com.empresacomercial.domain.TipoCliente;
 
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
 public class clienteBean implements Serializable {
 	private Cliente cliente;
-	private TipoCliente tipoCliente;
 	private List<Cliente> clientes;
 
 	public Cliente getCliente() {
@@ -37,16 +36,8 @@ public class clienteBean implements Serializable {
 		this.clientes = clientes;
 	}
 
-	public TipoCliente getTipoCliente() {
-		return tipoCliente;
-	}
-
-	public void setTipoCliente(TipoCliente tipoCliente) {
-		this.tipoCliente = tipoCliente;
-	}
-	
 	@PostConstruct
-	public void listar(){
+	public void listar() {
 		try {
 			ClienteDAO clienteDAO = new ClienteDAO();
 			clientes = clienteDAO.Listar();
@@ -55,7 +46,7 @@ public class clienteBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
+
 	public void novo() {
 		cliente = new Cliente();
 	}
@@ -63,7 +54,12 @@ public class clienteBean implements Serializable {
 	public void salvar() {
 		try {
 			ClienteDAO clienteDAO = new ClienteDAO();
-			clienteDAO.salvar(cliente);
+			clienteDAO.merge(cliente);
+
+			novo();
+
+			clientes = clienteDAO.Listar();
+
 			Messages.addGlobalInfo("Cliente Salvo com Sucesso!");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar salvar os Clientes");
@@ -72,11 +68,33 @@ public class clienteBean implements Serializable {
 
 	}
 
-	public void excluir() {
-		System.out.println("Teste de excluir");
+	public void excluir(ActionEvent evento) {
+		try {
+			cliente = (Cliente) evento.getComponent().getAttributes().get("pessoaSelecionada");
+			ClienteDAO clienteDAO = new ClienteDAO();
+
+			clienteDAO.excluir(cliente);
+
+			clientes = clienteDAO.Listar();
+
+			Messages.addGlobalInfo("Cliente Excluido com Sucesso!");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar remover o Cliente");
+			erro.printStackTrace();
+		}
 	}
 
-	public void editar() {
-		System.out.println("Teste Editar");
+	public void editar(ActionEvent evento) {
+		try {
+			cliente = (Cliente) evento.getComponent().getAttributes().get("pessoaSelecionada");
+
+			ClienteDAO clienteDAO = new ClienteDAO();
+			clientes = clienteDAO.Listar();
+
+			Messages.addGlobalInfo("Cliente Editado com Sucesso!");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar Editar um Cliente");
+			erro.printStackTrace();
+		}
 	}
 }

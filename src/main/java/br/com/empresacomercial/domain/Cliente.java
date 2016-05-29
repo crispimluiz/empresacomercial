@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,10 +16,10 @@ import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "cliente")
-public class Cliente implements Serializable{
-	
+public class Cliente implements Serializable {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
 	@Column(name = "nome_cliente", length = 50, nullable = false)
@@ -48,11 +49,14 @@ public class Cliente implements Serializable{
 	@Column(name = "data_cadastro")
 	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;
-
+	
+	@Column
 	private String cpf;
-
+	
+	@Column
 	private String cnpj;
-
+	
+	@Column(nullable = false)
 	private TipoCliente tipoCliente;
 
 	public String getNome() {
@@ -151,7 +155,7 @@ public class Cliente implements Serializable{
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-
+	@Enumerated
 	public TipoCliente getTipoCliente() {
 		return tipoCliente;
 	}
@@ -166,6 +170,11 @@ public class Cliente implements Serializable{
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s[codigo=%d]", getClass().getSimpleName(), getCodigo());
 	}
 
 	@Override
@@ -192,5 +201,5 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }

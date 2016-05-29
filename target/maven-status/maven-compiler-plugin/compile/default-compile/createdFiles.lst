@@ -1,10 +1,12 @@
 br\com\empresacomercial\domain\Porte.class
+br\com\empresacomercial\bean\contatoBean.class
 br\com\empresacomercial\domain\Contato.class
 br\com\empresacomercial\dao\ClienteDAO.class
 br\com\empresacomercial\bean\clienteBean.class
 br\com\empresacomercial\dao\ContatoDAO.class
 br\com\empresacomercial\domain\Cargo.class
 br\com\empresacomercial\util\HibernateUtil.class
+br\com\empresacomercial\util\HibernateContexto.class
 br\com\empresacomercial\dao\GenericDAO.class
 br\com\empresacomercial\domain\TipoCliente.class
 br\com\empresacomercial\domain\Cliente.class

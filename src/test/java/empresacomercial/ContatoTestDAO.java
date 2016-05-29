@@ -15,12 +15,12 @@ import br.com.empresacomercial.domain.Departamento;
 public class ContatoTestDAO {
 	@Test
 	@Ignore
-	public void salvar(){
+	public void salvar() {
 		Long codigoCliente = 2L;
-		
+
 		ClienteDAO clienteDAO = new ClienteDAO();
 		Cliente cliente = clienteDAO.buscar(codigoCliente);
-		
+
 		Contato contato = new Contato();
 		contato.setCliente(cliente);
 		contato.setNomeContato("Joaquim de Oliveira");
@@ -28,29 +28,28 @@ public class ContatoTestDAO {
 		contato.setTelefoneContato("4328429892");
 		contato.setCargo(Cargo.VENDEDOR);
 		contato.setDepartamento(Departamento.SERVIÇOS);
-		
-		
+
 		ContatoDAO contatoDAO = new ContatoDAO();
 		contatoDAO.salvar(contato);
-		
+
 		System.out.println("Usuário Salvo com sucesso");
-		
-		
+
 	}
+
 	@Test
 	@Ignore
-	public void listar(){
-		
+	public void listar() {
+
 		ContatoDAO contatoDAO = new ContatoDAO();
 		List<Contato> resultado = contatoDAO.Listar();
-		
-		for(Contato contato : resultado){
-			
-			System.out.println(contato.getCodigo()+" - "+contato.getNomeContato()+" - "+contato.getEmailContato()+" - "+contato.getTelefoneContato());
-			
+
+		for (Contato contato : resultado) {
+
+			System.out.println(contato.getCodigo() + " - " + contato.getNomeContato() + " - "
+					+ contato.getEmailContato() + " - " + contato.getTelefoneContato());
+
 		}
-		
+
 	}
-	
 
 }

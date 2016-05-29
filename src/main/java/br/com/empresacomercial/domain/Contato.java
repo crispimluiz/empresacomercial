@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,7 +69,7 @@ public class Contato implements Serializable{
 	public void setTelefoneContato(String telefoneContato) {
 		this.telefoneContato = telefoneContato;
 	}
-
+	@Enumerated
 	public Cargo getCargo() {
 		return cargo;
 	}
@@ -76,7 +77,7 @@ public class Contato implements Serializable{
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
-
+	@Enumerated
 	public Departamento getDepartamento() {
 		return departamento;
 	}
@@ -91,6 +92,11 @@ public class Contato implements Serializable{
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s[codigo=%d]", getClass().getSimpleName(), getCodigo());
 	}
 
 	@Override
