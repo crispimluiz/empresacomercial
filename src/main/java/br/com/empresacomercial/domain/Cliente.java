@@ -9,9 +9,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 @SuppressWarnings("serial")
 @Entity
@@ -33,7 +37,7 @@ public class Cliente implements Serializable {
 
 	@Column(length = 13, nullable = false)
 	private String telefone;
-
+	
 	@Column(length = 100)
 	private String email;
 
@@ -42,6 +46,14 @@ public class Cliente implements Serializable {
 
 	@Column(length = 50, nullable = false)
 	private String estado;
+	
+	@CPF
+	@Column
+	private String cpf;
+	
+	@CNPJ
+	@Column
+	private String cnpj;
 
 	@Column(name = "limite_credito")
 	private double limiteCredito;
@@ -50,15 +62,12 @@ public class Cliente implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;
 	
-	@Column
-	private String cpf;
-	
-	@Column
-	private String cnpj;
-	
 	@Column(nullable = false)
 	private TipoCliente tipoCliente;
-
+	
+	@JoinColumn(nullable = false)
+	private Porte porte;
+	
 	public String getNome() {
 		return nomeCliente;
 	}
@@ -139,7 +148,6 @@ public class Cliente implements Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-
 	public String getCpf() {
 		return cpf;
 	}
@@ -155,6 +163,7 @@ public class Cliente implements Serializable {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
+
 	@Enumerated
 	public TipoCliente getTipoCliente() {
 		return tipoCliente;
@@ -172,6 +181,15 @@ public class Cliente implements Serializable {
 		this.codigo = codigo;
 	}
 	
+	@Enumerated
+	public Porte getPorte() {
+		return porte;
+	}
+
+	public void setPorte(Porte porte) {
+		this.porte = porte;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%s[codigo=%d]", getClass().getSimpleName(), getCodigo());

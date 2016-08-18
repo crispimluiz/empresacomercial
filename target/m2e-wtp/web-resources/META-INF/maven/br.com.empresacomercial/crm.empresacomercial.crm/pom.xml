@@ -30,12 +30,12 @@
 
 	<!-- PrimeFaces -->
 	<repositories>
-	<repository> 
-		<id>prime-repo</id>
-		<name>PrimeFaces Maven Repository</name>
-		<url>http://repository.primefaces.org</url>
-		<layout>default</layout>
-	</repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
 
 	</repositories>
 
@@ -47,6 +47,14 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.1.0.Final</version>
 		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.2.Final</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.hsqldb</groupId>
@@ -94,7 +102,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		
+
 		<!-- Jersey -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>

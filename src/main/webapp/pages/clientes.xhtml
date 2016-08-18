@@ -15,7 +15,8 @@
 		<p:panel header="Clientes - Listagem">
 			<div align="center">
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
-					paginator="true" value="#{clienteBean.clientes}" var="cliente">
+					paginator="true" value="#{clienteBean.clientes}" var="cliente"
+					rows="10">
 					<f:facet name="header">
 						<p:commandButton value="Novo" actionListener="#{clienteBean.novo}"
 							oncomplete="PF('dialogo').show();"
@@ -43,28 +44,36 @@
 						<h:outputText value="#{cliente.numeroEndereco}" />
 					</p:column>
 
-					<p:column headerText="Telefone" filterBy="#{cliente.telefone}"
-						sortBy="#{cliente.telefone}">
+					<p:column style="width:8%" headerText="Telefone"
+						filterBy="#{cliente.telefone}" sortBy="#{cliente.telefone}">
 						<h:outputText id="telefone" maxlength="50" size="30"
 							value="#{cliente.telefone}" />
 					</p:column>
 
-					<p:column headerText="Fisica ou Juridica"
+					<p:column style="width:8%" headerText="Fisica ou Juridica"
 						filterBy="#{cliente.tipoCliente}" sortBy="#{cliente.tipoCliente}">
-						<h:outputText id="tipoCliente" maxlength="50" size="30"
-							value="#{cliente.tipoCliente}" />
+						<h:outputText id="tipoCliente" value="#{cliente.tipoCliente}" />
 					</p:column>
 
+					<p:column headerText="Documento Federal" filterBy="#{cliente.cnpj}"
+						sortBy="#{cliente.cnpj}">
+						<h:outputText id="cpf" value="#{cliente.cnpj}" />
+					</p:column>
 
-
-					<p:column style="width:12%" headerText="Cidade"
+					<p:column style="width:9%" headerText="Cidade"
 						filterBy="#{cliente.cidade}" sortBy="#{cliente.cidade}">
 						<h:outputText value="#{cliente.cidade}" />
 						<h:outputText value=" - " />
 						<h:outputText value="#{cliente.estado}" />
 					</p:column>
 
-					<p:column style="width:12%" headerText="Limite de Crédito"
+					<p:column style="width:8%" headerText="Porte"
+						filterBy="#{cliente.porte}" sortBy="#{cliente.porte}">
+						<h:outputText id="porte" maxlength="50" size="30"
+							value="#{cliente.porte}" />
+					</p:column>
+
+					<p:column style="width:7%" headerText="Limite de Crédito"
 						sortBy="#{cliente.limiteCredito}">
 						<h:outputText value="#{cliente.limiteCredito}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
@@ -124,24 +133,34 @@
 					requiredMessage="O campo 'Telefone' é obrigatório" />
 
 				<h:outputLabel value="Pessoa Física ou Juridica:" />
-				<h:selectOneMenu value="#{clienteBean.cliente.tipoCliente}">
+				<h:selectOneMenu value="#{clienteBean.cliente.tipoCliente}"
+					required="true"
+					requiredMessage="Preencha o 'Pessoa Física ou Juridica'">
 					<f:selectItem itemValue="#{null}" itemLabel="Físca ou Jurídica?" />
-					<f:selectItem itemValue="PESSOA_FISICA" itemLabel="PESSOA_FISICA" />
-					<f:selectItem itemValue="PESSOA_JURIDICA"
-						itemLabel="PESSOA_JURIDICA" />
+					<f:selectItem itemValue="FISICA" itemLabel="FISICA" />
+					<f:selectItem itemValue="JURIDICA" itemLabel="JURIDICA" />
 				</h:selectOneMenu>
 				<h:outputLabel value="CNPJ:" />
-				<p:inputMask id="CNPJ"  mask="99.999.999/9999-99"
+				<p:inputMask id="CNPJ" mask="99.999.999/9999-99"
 					disabled="#{clienteBean.cliente.cnpj}"
-					required="true" requiredMessage="Campo obrigatório não preenchido">
+						value="#{clienteBean.cliente.cnpj}" >
 				</p:inputMask>
 				<h:outputLabel value="CPF:" />
 				<p:inputMask id="CPF" mask="999.999.999-99"
 					disabled="#{clienteBean.cliente.cpf}"
-					required="true" requiredMessage="Campo obrigatório não preenchido">
-					</p:inputMask>
-				
-				
+					value="#{clienteBean.cliente.cpf}" >
+				</p:inputMask>
+
+				<h6>Porte da empresa</h6>
+				<h:selectOneMenu value="#{clienteBean.cliente.porte}"
+					required="true" requiredMessage="Preencha o Campo'Porte'">
+					<f:selectItem itemValue="#{null}" itemLabel="Porte da Empresa" />
+					<f:selectItem itemValue="MICRO" itemLabel="MICRO" />
+					<f:selectItem itemValue="PEQUENO" itemLabel="PEQUENO" />
+					<f:selectItem itemValue="MEDIO" itemLabel="MEDIO" />
+					<f:selectItem itemValue="GRANDE" itemLabel="GRANDE" />
+				</h:selectOneMenu>
+
 				<p:outputLabel for="email" value="Email:" />
 				<p:inputText id="email" maxlength="100" size="30"
 					value="#{clienteBean.cliente.email}" required="true"

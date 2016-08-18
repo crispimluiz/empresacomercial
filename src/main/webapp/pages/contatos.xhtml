@@ -15,7 +15,7 @@
 	<h:form id="formListagem">
 		<p:panel header="Contatos - Listagem">
 			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
-				paginator="true" value="#{contatoBean.contatos}" var="contato">
+				paginator="true" value="#{contatoBean.contatos}" var="contato" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" actionListener="#{contatoBean.novo}"
 						oncomplete="PF('dialogo').show();"
@@ -144,7 +144,7 @@
 					<f:selectItem itemValue="#{null}" itemLabel="Qual Departamento?" />
 					<f:selectItem itemValue="COMERCIAL" itemLabel="COMERCIAL" />
 					<f:selectItem itemValue="FINANCEIRO" itemLabel="FINANCEIRO" />
-					<f:selectItem itemValue="SERVICOS" itemLabel="SERVICOS" />
+					<f:selectItem itemValue="SERVIÇOS" itemLabel="SERVIÇOS" />
 					<f:selectItem itemValue="INDUSTRIA" itemLabel="INDUSTRIA" />
 					<f:selectItem itemValue="ALMOXARIFADO" itemLabel="ALMOXARIFADO" />
 					<f:selectItem itemValue="RECURSOS_HUMANOS"
@@ -157,8 +157,8 @@
 
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar"
-					update=":mensagem :formCadastro:painel :formListagem:tabela"
-					actionListener="#{contatoBean.salvar}" />
+					actionListener="#{contatoBean.salvar}"
+					update=":mensagem :formCadastro:painel :formListagem:tabela"/>
 				<p:commandButton value="Retornar" oncomplete="PF('dialogo').hide();" />
 			</h:panelGrid>
 		</h:form>
